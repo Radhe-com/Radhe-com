@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>www.radhe.com</title>
+    <title>Radhe Radhe Divine Mantra Jaap | codes_.py</title>
     
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/10700/10700688.png" type="image/png">
+    <link rel="icon" href="favicon.png" type="image/png">
 
     <style>
         :root {
-            --neon-gold: #ffcc00;
-            --neon-blue: #00f2ff;
+            --saffron: #ff9933;
+            --gold: #d4af37;
             --deep-black: #050505;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: var(--deep-black);
+            background-color: var(--deep-black);
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('mandir_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
             font-family: 'Poppins', sans-serif;
             display: flex;
@@ -26,68 +30,48 @@
             min-height: 100vh;
         }
 
-        /* Ambient Background */
-        .aura-bg {
+        /* Ambient Light */
+        .ambient-glow {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #111122 0%, #000 85%);
+            background: radial-gradient(circle at center, rgba(255,153,51,0.05) 0%, transparent 70%);
             z-index: -1;
         }
 
-        header { text-align: center; padding: 30px 0; }
+        header { text-align: center; padding: 20px 0; }
 
-        /* Floating Radha Photo */
+        /* Floating Radha Photo (Path is set) */
         .radha-img {
-            width: 160px; height: 160px;
+            width: 150px; height: 150px;
             border-radius: 50%;
-            border: 3px solid var(--neon-gold);
-            box-shadow: 0 0 40px rgba(255, 204, 0, 0.5);
+            border: 5px solid var(--saffron);
+            box-shadow: 0 0 40px var(--saffron);
             object-fit: cover;
-            animation: float 4s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite, glow 2s infinite alternate;
+            display: none; /* Initially Hidden */
         }
 
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes glow { from { box-shadow: 0 0 20px var(--saffron); } to { box-shadow: 0 0 50px rgba(255, 153, 51, 0.7); } }
 
         .title {
-            font-size: 3rem;
-            color: var(--neon-gold);
-            text-shadow: 0 0 15px var(--neon-gold);
+            font-size: 2.8rem;
+            color: var(--saffron);
+            text-shadow: 0 0 10px var(--saffron);
             margin: 10px 0;
             font-weight: 800;
         }
 
-        /* Digital Rudraksh Row */
-        .rudraksh-row { display: flex; gap: 8px; justify-content: center; margin: 10px 0; }
-        .bead {
-            width: 12px; height: 12px;
-            background: radial-gradient(circle, #795548, #3e2723);
-            border-radius: 50%;
-            box-shadow: inset -2px -2px 5px #000;
-        }
-
-        /* Main Counter Unit */
-        .jap-unit {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--neon-blue);
-            padding: 40px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
+        /* Mandir Entrance Section */
+        .mandir-entrance {
             text-align: center;
-            width: 90%;
-            max-width: 350px;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            margin-top: 50px;
         }
 
-        #jap-count {
-            font-size: 5.5rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 20px var(--neon-blue);
-            font-family: 'Consolas', monospace;
-            display: block;
-        }
+        .mandir-title { font-size: 2rem; color: var(--gold); margin-bottom: 30px; }
 
         .btn-action {
-            background: linear-gradient(45deg, var(--neon-gold), #ff8800);
+            background: linear-gradient(45deg, var(--saffron), #ff8800);
             color: #000;
             border: none;
             padding: 15px 45px;
@@ -95,12 +79,51 @@
             font-weight: 900;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 25px;
             box-shadow: 0 0 15px rgba(255, 200, 0, 0.4);
             transition: 0.2s;
         }
 
         .btn-action:active { transform: scale(0.92); }
+
+        /* Diya Section */
+        .diya-section {
+            display: none; /* Initially Hidden */
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .diya {
+            width: 80px; height: 80px;
+            background: radial-gradient(circle at center, var(--saffron), #ffcc66);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--saffron);
+            animation: diya-pulse 1s infinite alternate;
+        }
+
+        @keyframes diya-pulse { from { transform: scale(1); opacity: 0.8; } to { transform: scale(1.1); opacity: 1; } }
+
+        /* Mantra Section */
+        .mantra-unit {
+            display: none; /* Initially Hidden */
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 90%;
+            max-width: 350px;
+            margin-top: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #jap-count {
+            font-size: 5.5rem;
+            color: var(--saffron);
+            text-shadow: 0 0 20px var(--saffron);
+            font-family: 'Consolas', monospace;
+            display: block;
+        }
 
         /* History List */
         #log {
@@ -111,62 +134,91 @@
             border-top: 1px solid rgba(255,255,255,0.05);
             font-size: 0.9rem;
         }
-        .log-entry { color: var(--neon-gold); opacity: 0.7; padding: 4px; }
+        .log-entry { color: var(--gold); opacity: 0.7; padding: 4px; }
 
-        /* CREATOR CARD (SPECIAL) */
+        /* CREATOR CARD */
         .creator-card {
             margin: 50px 0;
             padding: 15px 30px;
-            background: rgba(0, 242, 255, 0.05);
-            border-left: 4px solid var(--neon-blue);
-            border-right: 4px solid var(--neon-blue);
+            background: rgba(255, 153, 51, 0.05);
+            border-left: 4px solid var(--saffron);
+            border-right: 4px solid var(--saffron);
             border-radius: 10px;
             text-align: center;
             animation: pulse-glow 2s infinite alternate;
         }
 
         @keyframes pulse-glow {
-            from { box-shadow: 0 0 5px rgba(0, 242, 255, 0.2); }
-            to { box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); }
+            from { box-shadow: 0 0 5px rgba(255, 153, 51, 0.2); }
+            to { box-shadow: 0 0 20px rgba(255, 153, 51, 0.5); }
         }
 
-        .creator-label { font-size: 0.6rem; letter-spacing: 4px; color: var(--neon-blue); text-transform: uppercase; }
+        .creator-label { font-size: 0.6rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; }
         .creator-handle { font-size: 1.5rem; font-weight: bold; color: #fff; text-shadow: 0 0 10px #fff; }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--neon-blue); }
+        ::-webkit-scrollbar-thumb { background: var(--saffron); }
     </style>
 </head>
 <body>
-    <div class="aura-bg"></div>
+    <div class="ambient-glow"></div>
 
-    <header>
-        <img src="https://i.pinimg.com/originals/8a/8a/6a/8a8a6a6f1d0061e88863f8980327f12e.jpg" alt="Radha Rani" class="radha-img">
-        <h1 class="title">राधे राधे</h1>
-        <div class="rudraksh-row">
-            <div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div><div class="bead"></div>
+    <main class="mandir-entrance" id="entrance">
+        <h2 class="mandir-title">श्री राधा रानी मंदिर</h2>
+        <p style="margin-bottom: 20px; color: rgba(255,255,255,0.7);">प्रवेश करें और दिव्य मंत्र जाप शुरू करें</p>
+        <button class="btn-action" onclick="enterMandir()">प्रवेश करें</button>
+    </main>
+
+    <section class="diya-section" id="diya-div">
+        <h3 class="title" style="font-size: 1.8rem; color: var(--gold);">दीप प्रज्वलन</h3>
+        <p style="margin-bottom: 15px; color: rgba(255,255,255,0.7);">दिया जलाएं और मंत्र शुरू करें</p>
+        <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <div class="diya"></div>
         </div>
-    </header>
+        <button class="btn-action" onclick="lightDiya()">दिया जलाएं</button>
+    </section>
 
-    <main class="jap-unit">
+    <section class="mantra-unit" id="mantra-div">
+        <header>
+            <img src="radha_rani.jpg" alt="Radha Rani" class="radha-img" id="radha-photo">
+            <h1 class="title">राधे राधे</h1>
+        </header>
         <span id="jap-count">000</span>
-        <button class="btn-action" onclick="addJap()">START JAP</button>
+        <button class="btn-action" onclick="addJap()" id="jap-btn" style="margin-top: 25px;">START JAP</button>
         
         <div id="log"></div>
 
         <p id="finish" style="display:none; color: #00ff88; margin-top: 20px; font-weight: bold;">
-            ✨ Maala Sampoorna! Radhe Radhe! ✨
+            ✨ माला संपूर्णा! राधे राधे! ✨
         </p>
-    </main>
+    </section>
 
     <div class="creator-card">
         <div class="creator-label">Divine Architect</div>
         <div class="creator-handle">codes_.py</div>
     </div>
 
+    <audio id="bell-sound" src="bell.mp3"></audio>
+
     <script>
+        // 1. Enter Mandir
+        function enterMandir() {
+            document.getElementById('entrance').style.display = 'none';
+            document.getElementById('diya-div').style.display = 'block';
+            playSound('bell-sound');
+        }
+
+        // 2. Light Diya
+        function lightDiya() {
+            document.getElementById('diya-div').style.display = 'none';
+            document.getElementById('mantra-div').style.display = 'block';
+            document.getElementById('radha-photo').style.display = 'block'; // Show Radha photo
+            playSound('bell-sound');
+        }
+
         let counter = 0;
+        // 3. Jap Counter
         function addJap() {
             if(counter < 108) {
                 counter++;
@@ -178,14 +230,25 @@
                 entry.innerText = counter + ". Radhe Radhe";
                 log.prepend(entry);
 
-                if (navigator.vibrate) navigator.vibrate(30);
+                if (navigator.vibrate) navigator.vibrate(30); // Haptic feedback
 
                 if(counter === 108) {
                     document.getElementById('finish').style.display = 'block';
-                    document.querySelector('.btn-action').style.display = 'none';
+                    document.getElementById('jap-btn').style.display = 'none';
+                    playSound('bell-sound');
                 }
+            }
+        }
+
+        // Play Sound Function
+        function playSound(soundId) {
+            const sound = document.getElementById(soundId);
+            if (sound) {
+                sound.play().catch(error => {
+                    console.log("Audio playback failed:", error);
+                });
             }
         }
     </script>
 </body>
-            </html>
+    </html>
