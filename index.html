@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radhe Radhe 108 Jaap - codes_.py</title>
+    <style>
+        :root {
+            --gold: #ffcf40;
+            --deep-red: #8e0000;
+            --digital-blue: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            background: #0a0a0a; /* Deep Black for Digital Look */
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Ambient Glow Background */
+        .bg-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold);
+            margin-bottom: 10px;
+        }
+
+        /* Counter Box */
+        .counter-container {
+            background: var(--glass);
+            border: 2px solid var(--gold);
+            padding: 20px 50px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(255, 207, 64, 0.2);
+        }
+
+        .counter-number {
+            font-size: 5rem;
+            font-weight: bold;
+            color: var(--digital-blue);
+            display: block;
+        }
+
+        .btn-jaap {
+            background: linear-gradient(45deg, var(--gold), #ff9f43);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #000;
+        }
+
+        .btn-jaap:active { transform: scale(0.95); }
+
+        /* Chants Display Area */
+        #chants-display {
+            width: 90%;
+            max-width: 600px;
+            height: 300px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column-reverse; /* Naya chant upar dikhega */
+        }
+
+        .chant-line {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--gold);
+            animation: fadeIn 0.5s ease-in;
+            font-size: 1.2rem;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Creator Section */
+        .creator-box {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid var(--glass);
+            width: 100%;
+        }
+
+        .creator-name {
+            color: var(--digital-blue);
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        /* Success Message */
+        #completion-msg {
+            display: none;
+            color: #2ecc71;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Custom Scrollbar */
+        #chants-display::-webkit-scrollbar { width: 5px; }
+        #chants-display::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header>
+        <h1>Radhe Radhe</h1>
+        <p>108 Digital Jaap Experience</p>
+    </header>
+
+    <div class="counter-container">
+        <span class="counter-number" id="count">0</span>
+        <p>Current Count</p>
+        <button class="btn-jaap" onclick="doJaap()">JAP KAREIN</button>
+        <p id="completion-msg">✨ 108 Jaap Poore Hue! Radhe Radhe! ✨</p>
+    </div>
+
+    <div id="chants-display">
+        </div>
+
+    <div class="creator-box">
+        <p>Developed with Devotion by</p>
+        <div class="creator-name"><u>codes_.py</u></div>
+    </div>
+
+    <script>
+        let count = 0;
+        const countDisplay = document.getElementById('count');
+        const chantsDisplay = document.getElementById('chants-display');
+        const msg = document.getElementById('completion-msg');
+
+        function doJaap() {
+            if (count < 108) {
+                count++;
+                countDisplay.innerText = count;
+
+                // Nayi line add karna
+                const newLine = document.createElement('div');
+                newLine.className = 'chant-line';
+                newLine.innerText = count + ". Radhe Radhe";
+                chantsDisplay.appendChild(newLine);
+
+                // Sound Effect (Optional - halke se click ki tarah)
+                if (window.navigator.vibrate) window.navigator.vibrate(50);
+
+                if (count === 108) {
+                    msg.style.display = 'block';
+                    document.querySelector('.btn-jaap').style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
