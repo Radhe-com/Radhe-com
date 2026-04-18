@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radhe-com.github.io/radhe/sitemap.xml
